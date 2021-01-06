@@ -1,0 +1,44 @@
+----------1.atoi------------
+def atoi(s):
+    n=0
+    for i in range(len(s)):
+        if s[i]=='A' or s[i]=='B' or s[i]=='C' or s[i]=='D' or s[i]=='E' or s[i]=='F':
+            n += 16**(len(s)-1-i)*(ord(s[i])-55)
+        else:
+            n += 16**(len(s)-1-i)*(ord(s[i])-48)
+    return n
+
+print(atoi('42FB'))
+
+----------2.itoa------------
+def itoa(n):
+    s=''
+    while True:
+        s=chr(n%10+48)+s
+        n=n//10
+        if n==0:
+            return s
+
+print(type(itoa(123)))
+
+----------3.È¸¹®------------
+data = 'algorithm'
+l=[]
+for i in data:
+    l.append(i)
+rep = len(l)//2
+
+# for i in range(rep):
+#     l[i], l[len(l)-1-i] = l[len(l)-1-i], l[i]
+#
+# new_s = ''.join(l)
+# print(new_s)
+
+start = 0
+end = len(data)-1
+
+while start<end:
+    l[start], l[end] = l[end], l[start]
+    start+=1
+    end-=1
+print(''.join(l))

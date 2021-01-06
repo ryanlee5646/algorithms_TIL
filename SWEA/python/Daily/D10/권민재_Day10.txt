@@ -1,0 +1,135 @@
+Day10
+
+1.(마이구미) contact - BFS
+
+def Isconnected(a,b):
+    if data[a][b] ==1:
+        return True
+def Isnotvisited(a):
+    if not visited[a]:
+        return True
+
+def contact(v):
+    Q.append(v)
+    visited[v] =True
+    while Q:
+        here = Q.pop(0)
+        for next in range(len(data[here])):
+            if Isconnected(here,next) and Isnotvisited(next):
+                Q.append(next)
+                visited[next] = True
+                distance[next] = distance[here]+1
+
+for time in range(10):
+    N, start_point = map(int,input().split())
+    nodes = list(map(int,input().split()))
+    data=[[0 for _ in range(max(nodes)+1)] for _ in range(max(nodes)+1)]
+
+    Q=[]
+    visited = [0]*(max(nodes)+1)
+    distance = [0]*(max(nodes)+1)
+
+    for start_to in range(len(nodes)//2):
+        start = nodes[2*start_to]
+        to = nodes[2*start_to+1]
+        data[start][to] = 1
+
+    contact(start_point)
+
+    max_dis = max(distance)
+    for idx in range(len(distance)-1,-1,-1):
+        if distance[idx] == max_dis:
+            ans = idx
+            break
+    print(f'#{time+1} {ans}')
+
+
+
+2.(마이구미) contact - DFS
+def NotVistied(a):
+    if visited[a] == 0:
+        return True
+
+def dfs(here):
+    global distance, visited
+    visited[here] = True
+    if not data[here]:
+        return
+    for next in range(len(data[here])):
+        if (NotVistied(next) or distance[here]+1 < distance[next]) and data[here][next]==1:
+            visited[next]=True
+
+            distance[next] = distance[here] +1
+            dfs(next)
+
+
+for time in range(10):
+    N, start_point = map(int, input().split())
+    nodes = list(map(int, input().split()))
+    data = [[0 for _ in range(max(nodes) + 1)] for _ in range(max(nodes) + 1)]
+
+    Q = []
+    visited = [0] * (max(nodes) + 1)
+    distance = [0] * (max(nodes) + 1)
+
+    for start_to in range(len(nodes) // 2):
+        start = nodes[2 * start_to]
+        to = nodes[2 * start_to + 1]
+        data[start][to] = 1
+
+    dfs(start_point)
+
+    max_dis = max(distance)
+    for idx in range(len(distance) - 1, -1, -1):
+        if distance[idx] == max_dis:
+            ans = idx
+            break
+    print(ans)
+
+
+3. (마이구미)수도요금경쟁
+
+T=int(input())
+for i in range(T):
+    P,Q,R,S,W=map(int,input().split())
+    A=P*W
+    if W<=R:
+        B=Q
+        print(f'#{i+1} {min(A,B)}')
+    else:
+        B=Q+(W-R)*S
+        print(f'#{i+1} {min(A,B)}')
+
+
+4. 회문
+
+T = int(input())
+for time in range(T):
+    W = input()
+    check =''
+    for i in range(len(W)):
+        check = W[i] + check
+
+    if check == W:
+        print('Yes')
+    else:
+        print('No')
+
+
+5. itoa
+
+
+
+6. atot
+
+Data = list('42FB')
+data= 0
+
+for now in range(len(Data)):
+    if '0' <= Data[now] <= '9':
+        val = ord(Data[now])-ord('0')
+
+    elif 'A' <= Data[now] <= 'F':
+        val = (ord(Data[now]) - ord('A'))+10
+    data = data*16 +val
+print(data)

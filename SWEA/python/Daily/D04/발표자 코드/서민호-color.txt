@@ -1,0 +1,25 @@
+test = int(input())
+for tc in range(test):
+    case = int(input())
+    red = []
+    blue = []
+    for case_num in range(case):
+        datas = list(map(int,input().split()))
+    # 가로 = datas[0] ~ datas[2]+1 
+    # 세로 = datas[1] ~ datas[3]+1
+
+        garo = datas[2]+1-datas[0]
+        sero = datas[3]+1-datas[1]
+        for y in range(sero):
+            for x in range(garo):
+                if datas[4] == 1:
+                    red += [[datas[0]+x,datas[1]+y]] #[[2,2],[2,3],[3,2],[3,3]]
+                elif datas[4] == 2:
+                    blue += [[datas[0]+x,datas[1]+y]]
+
+    count = 0
+    for red_i in red:
+        for blue_i in blue:
+            if red_i == blue_i:
+                count += 1
+    print(f'#{tc+1} {count}')

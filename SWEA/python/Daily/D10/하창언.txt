@@ -1,0 +1,63 @@
+1. contact
+def bfs(people,visited,target,queue):
+    global result
+    for i in range(101):
+        if people[target][i]==1 and not visited[i]:
+            queue.append(i)
+            visited[i]=1
+            if i > result:
+                result = i
+for case in range(10):
+    size , start = map(int,input().split())
+    fromtolist = list(map(int,input().split()))
+    people = [[0]*101 for _ in range(101)]
+    visited = [0]*101
+    result = 0
+    for i in range(0,size-1,2):
+        people[fromtolist[i]][fromtolist[1+i]]=1
+    queue = []
+    queue.append(start)
+    visited[start]=1
+    while queue:
+        tmpque = []
+        for i in range(len(queue)):
+            bfs(people, visited, queue.pop(0), tmpque)
+        queue=tmpque
+        if not queue:
+            break
+        else:
+            result = max(queue)
+    print(f'#{case+1} {result}')
+
+2.itoa
+def itoa(n):
+    s = ""
+    while n!=0:
+        a=n%10
+        s=chr(a+48)+s
+        n=n//10
+    return s
+print(itoa(123))
+
+3.atoi
+def atoi(s):
+    lenth = len(s)
+    result = 0
+    for i in range(lenth):
+        if ord(s[i])<=57:
+            a=ord(s[i])-48
+        else:
+            a=ord(s[i])-55
+        result+=a*16**(lenth-1-i)
+    return result
+print(atoi('42FB'))
+ 
+4.문자열뒤집
+def revers(a):
+    result = ""
+    for i in range(len(a)):
+        result=result+a[len(a)-i-1]
+    return result
+
+a="1234"
+print(revers(a))

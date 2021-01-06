@@ -1,0 +1,116 @@
+
+
+
+#algorithm
+
+data=[str(x) for x in input()]
+print(data)
+b=int(len(data))-1
+
+for i in range(int(len(data)/2)):
+
+    data[i] , data[b] = data[b], data[i]
+
+    b -=1
+print(data)
+
+
+#itoa
+
+def itoa(data):
+    global result, q, a
+    while data != 0:
+
+        a= data %10
+        q.append(chr(a+ord('0')))
+        data= data//10
+
+    while q != []:
+        result.append(q.pop())
+    print(result)
+q=[]
+a=-1
+result=[]
+itoa(12524)
+
+#contact
+
+def bfs(start):
+    global front, rear, result
+    visited[start]=1
+    rear +=1
+    q.append(start)
+
+    while front !=rear:
+        front +=1
+        y=q[front]
+        for x in range(101):
+            if mymap[y][x] and not visited[x]:
+                q.append(x)
+                visited[x] = visited[y] +1
+                rear +=1
+        # print(visited)
+    if visited.count(max(visited)) >1:
+        for a in range(len(visited)):
+            if visited[a] == max(visited):
+                result = a
+        print(f'#{j+1} {result}')
+        return
+    elif visited.count(max(visited)) ==1:
+        print(f'#{j+1} {visited.index(max(visited))}')
+        return
+    else:
+        print(f'#{j+1} {0}')
+        return
+
+
+for j in range(10):
+    num=list(map(int,input().split()))
+    start=num[1]
+    # print(f'start{start}')
+    visited=[0]*101
+    front=-1
+    rear=-1
+    q=[]
+    result=0
+    data=list(map(int,input().split()))
+    # print(data)
+    mymap=[[0 for i in range(301)] for a in range(301)]
+
+    for i in range(int(len(data)/2)):
+
+        y= data[i*2]
+        x= data[i*2+1]
+        mymap[y][x]=1
+
+    bfs(start)
+
+## 수도요금
+
+num=int(input())
+def choose(w):
+    global a, b
+    a= p * w
+    if r >=w :
+        b=q
+    elif r < w :
+        b= q + ((w-r)*s)
+    if b > a:
+        print(f'#{j+1} {a}')
+    else:
+        print(f'#{j+1} {b}')
+for j in range(num):
+    p,q,r,s,w= list(map(int,input().split()))
+    a=0
+    b=0
+    choose(w)
+
+## 회전
+num=int(input())
+
+for j in range(num):
+    v,m=list(map(int,input().split()))
+    data = list(map(int,input().split()))
+    for i in range(m):
+        data.append(data.pop(0))
+    print(f'#{j+1} {data[0]}')

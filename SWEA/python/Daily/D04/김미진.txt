@@ -1,0 +1,159 @@
+1. Snail
+def mini(data):
+    low=100
+    for n in range(5):
+        for m in range(5):
+            if low>data[n][m]:
+                low=data[n][m]
+                low_n=n
+                low_m=m
+    data[low_n][low_m]=100
+    return low
+
+def Iswall(y,x,snail,i):
+    if x>=0 and x<5 and y>=0 and y<5 and snail[y][x]==0:
+        return True
+    else:
+        return False
+
+data=[]
+for i in range(5):
+    data.append(list(map(int,input().split())))
+
+dx=[1,0,-1,0]
+dy=[0,1,0,-1]
+
+snail=[[0 for n in range(5)] for m in range(5)]
+cnt=i=newY=newX=0
+snail[0][0]=mini(data)
+
+while cnt<=23:
+    i=(i%4)
+    newY+=dy[i]
+    newX+=dx[i]
+    if Iswall(newY,newX,snail,i):
+        snail[newY][newX]=mini(data)
+        cnt+=1
+    else:
+        newY-=dy[i]
+        newX-=dx[i]
+        i+=1
+
+print(snail)
+
+2. 색칠하기
+T=int(input())
+for t in range(T):
+    N=int(input())
+    data=[]
+    color=[[0 for n in range(10)] for m in range(10)]
+    for n in range(N):
+        data.append(list(map(int,input().split())))
+
+    cnt=0
+    for d in data:
+        for y in range(d[0],d[2]+1):
+            for x in range(d[1],d[3]+1):
+                if color[y][x]==0 or color[y][x]==d[4]:
+                    color[y][x]=d[4]
+                else:
+                    color[y][x]+=d[4]
+                    cnt+=1
+    print(f"#{t+1} {cnt}")
+
+3. 부분집합
+T=int(input())
+for t in range(T):
+    N,K=map(int,input().split())
+    arr=[i for i in range(1,13)]
+
+    second = []
+    for i in range(1 << 12):
+        cnt = 0
+        for n in bin(i):
+            if n=='1':
+                cnt += 1
+        if cnt == N:
+            second.append(i)
+
+    count=0
+    for s in second:
+        result=[]
+        for j in range(12):
+            if s&(1<<j):
+                result.append(arr[j])
+        if sum(result)==K:
+            count+=1
+    print(f"#{t+1} {count}")
+
+4. 이진검색
+def find(l,r,x):
+    cnt=0
+    while x:
+        if x == r or x == l:
+            return cnt
+        c=(l+r)//2
+        if x>=c:
+            l=c
+        else:
+            r=c
+        cnt+=1
+
+T=int(input())
+for t in range(T):
+    P,A,B=map(int,input().split())
+    a=find(1,P,A)
+    b=find(1,P,B)
+    if a>b:
+        print(f"#{t+1} B")
+    elif a<b:
+        print(f"#{t+1} A")
+    else:
+        print(f"#{t+1} 0")
+
+5. 특별한 정렬
+T=int(input())
+for t in range(T):
+    N=int(input())
+    data=list(map(int,input().split()))
+
+    sort=[]
+
+    print(f"#{t+1}",end=" ")
+    for i in range(5):
+        sort.append(max(data))
+        print(data.pop(data.index(max(data))),end=" ")
+        sort.append(min(data))
+        print(data.pop(data.index(min(data))),end=" ")
+    print("")
+
+6. 금속막대
+def find(bolt,nut):
+    for i in range(len(bolt)):
+        if not bolt[i] in nut:
+            result.append(bolt[i])
+            result.append(nut[i])
+            bolt.remove(bolt[i])
+            nut.remove(nut[i])
+            break
+    return result
+ 
+T=int(input())
+for t in range(T):
+    N=int(input())
+    data=list(map(int,input().split()))
+    result=[]
+    nut=[]
+    bolt=[]
+ 
+    for i in range(1,2*N,2):
+        bolt.append(data[i-1])
+        nut.append(data[i])
+ 
+    while bolt:
+        find(bolt,nut)
+ 
+    print(f"#{t+1}",end=" ")
+    for r in result:
+        print(r,end=" ")
+    print("")

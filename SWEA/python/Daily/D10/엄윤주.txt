@@ -1,0 +1,17 @@
+<atoi>
+Char = list('42FB')
+char = 0
+for i in range(len(Char)):
+    if '0' <= Char[i] <= '9':
+        val = ord(Char[now])-ord('0')
+    elif 'A' <= Char[i] <= 'F':
+        val = ord(Data[now]) - ord('A') + 10
+    char = char+16 + val
+print(char)
+
+<알고리즘 회문>
+
+s = list('Reverse this strings')
+for i in range(len(s)//2):
+    s[i], s[-1-i] = s[-1-i], s[i]
+print(s)

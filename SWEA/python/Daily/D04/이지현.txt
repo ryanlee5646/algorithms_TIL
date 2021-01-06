@@ -1,0 +1,140 @@
+#색칠하기
+
+TC=int(input())
+for tc in range(1,TC+1):
+	bigbox = [[0 for x in range(10)] for y in range(10)]
+	N= int(input())
+	Data=[]
+
+	for l in range(N):
+		Data.append(list(map(int, input().split())))
+	cnt=0
+	for k in range(N):
+
+		if Data[k][4] ==1:
+			for i in range(Data[k][1],Data[k][3]+1):
+				for j in range(Data[k][0],Data[k][2]+1):
+					bigbox[i][j]+=1
+					if bigbox[i][j]==3:
+						cnt+=1
+		else:
+			for i in range(Data[k][1],Data[k][3]+1):
+				for j in range(Data[k][0],Data[k][2]+1):
+					bigbox[i][j] +=2
+					if bigbox[i][j]==3:
+						cnt+=1
+						
+
+
+	print(f'#{tc} {cnt}')
+
+
+
+
+
+
+
+#부분집합
+
+A=[i for i in range(1,13)]
+set=[]
+for i in range(1<<len(A)):
+	s=[]
+	for j in range(len(A)):
+		if i&(1<<j):
+			s.append(A[j])
+	set.append(s)
+
+
+TC= int(input())
+for tc in range(1,TC+1):
+	N, K = list(map(int, input().split()))
+	cnt = 0
+	for i in range(len(set)):
+		if len(set[i]) == N:
+			if sum(set[i]) == K:
+				cnt+=1
+
+	print(f'#{tc} {cnt}')
+
+
+#이진탐색
+
+TC=int(input())
+
+for tc in range(1,TC+1):
+	P, A, B=list(map(int, input().split()))
+
+	start_A = 1
+	end_A = P
+	cnt_A = 0
+	cnt_B = 0
+
+	for i in range(A):
+		c = (start_A + end_A) // 2
+		if A > c:
+			start_A = c
+			cnt_A += 1
+		elif A < c:
+			end_A = c
+			cnt_A += 1
+		else:
+			break
+
+	start_B = 1
+	end_B = P
+	for j in range(B):
+		d= (start_B + end_B)//2
+		if B > d:
+			start_B=d
+			cnt_B+=1
+		elif B< d:
+			end_B=d
+			cnt_B+=1
+		else:
+			break
+
+	if cnt_A > cnt_B:
+		print(f'#{tc} B')
+	elif cnt_A < cnt_B:
+		print(f'#{tc} A')
+	else:
+		print(f'#{tc} 0')
+
+#특별한정렬
+
+TC = int(input())
+
+for tc in range(1, TC+1):
+	N = int(input())
+	num_list = list(map(int, input().split()))
+	special_arr = [0 for k in range(N)]
+
+	for i in range(0,N,2):
+		special_arr[i] += max(num_list)
+		num_list.pop(num_list.index(max(num_list)))
+
+		if num_list==[]:
+			break
+
+	for j in range(1,N,2):
+		special_arr[j] += min(num_list)
+		num_list.pop(num_list.index(min(num_list)))
+
+
+		if num_list==[]:
+			break
+
+	strange_arr=''
+	for k in range(10):
+		strange_arr += str(special_arr[k])+' '
+
+	print(f'#{tc} {strange_arr}')
+
+
+#금속막대
+
+
+
+
+

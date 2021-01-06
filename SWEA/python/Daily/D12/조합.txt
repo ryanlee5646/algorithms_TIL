@@ -1,0 +1,22 @@
+import sys
+sys.stdin = open("input.txt")
+
+Data = list(map(int, input().split()))
+
+def GetSome(now, r):
+    if r == 3:
+        for i in range(n) :
+            if Visited[i] : print(Data[i], end=' ')
+        print()
+        return
+
+    if now >= n: return
+    Visited[now] = True
+    GetSome(now + 1, r + 1)
+    Visited[now] = False
+    GetSome(now + 1, r)
+
+
+n = 5; r = 3
+Visited = [0]*n
+GetSome(0,0)

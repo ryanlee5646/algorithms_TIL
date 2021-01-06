@@ -1,0 +1,53 @@
+import sys
+sys.stdin = open("input.txt", "r")
+ary = [ [ 9, 20, 2, 18, 11 ],
+	[ 19, 1, 25, 3, 21 ],
+	[ 8, 24, 10, 17, 7 ],
+	[ 15, 4, 16, 5, 6 ],
+	[ 12, 13, 22, 23, 14 ] ]
+
+SNAIL = [[0  for x in range(6)] for x in range(6)]
+
+def Doturn(y, x):
+    if SNAIL[y][x] != 0 or y > 4 or x > 4 or y < 0 or x < 0 : return True
+    else : return False
+
+def GetMin(ary):
+    min = 0
+    minX, minY= 0, 0
+    min = ary[0][0]
+    for y in range(5):
+        for x in range(5):
+            if min > ary[y][x]:
+                min = ary[y][x]
+                minY, minX =y,x
+    ary[minY][minX] = 99
+    return min
+
+
+
+cur_min = -1
+Y, X = 0, 0
+newY, newX = 0, 0
+dy = [0, 1, 0, -1]
+dx = [1, 0, -1, 0]
+dir = 0
+
+for i in range(25):
+    cur_min = GetMin(ary)
+    X, Y = newX, newY
+    SNAIL[Y][X] = cur_min
+    newX = X + dx[dir]
+    newY = Y + dy[dir]
+
+    if Doturn(newY, newX):
+        dir =(dir + 1) % 4
+        newX = X + dx[dir]
+        newY = Y + dy[dir]
+
+
+#Ãâ·Â
+for i in range(5):
+    for j in range(5):
+        print(SNAIL[i][j], end=" ")
+    print()

@@ -1,0 +1,29 @@
+T = int(input())    # T: Test case
+for W in range(T):
+    charae = W+1
+    result = 0
+    N = int(input())
+    sagak = [0]*N
+    for rac in range(N):
+        sagak[rac] = list(map(int, input().split()))
+    blank = [[0 for _ in range(10)] for _ in range(10)]
+
+    for Q in range(N):
+        if sagak[Q][4] == 1:
+            for r in range(sagak[Q][1], sagak[Q][3]+1):   # r의 범위
+               for c in range(sagak[Q][0], sagak[Q][2]+1 ):    # c의 범위
+                   if not blank[r][c] == 1: # 중복 방지!
+                       blank[r][c] += 1
+        elif sagak[Q][4] == 2:
+            for r in range(sagak[Q][1], sagak[Q][3]+1):
+               for c in range(sagak[Q][0], sagak[Q][2]+1):
+                   if not blank[r][c] == 2:
+                       blank[r][c] += 2
+    # for n in range(10):
+    #     print(blank[n])     # 확인용 코드
+
+    for gumsakan in blank:  # 하나씩 다 살피기 !
+        for real in gumsakan:
+            if real == 3:
+                result += 1
+    print('#%d %d' % (charae, result))

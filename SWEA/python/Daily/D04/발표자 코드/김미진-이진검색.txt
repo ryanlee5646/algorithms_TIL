@@ -1,0 +1,23 @@
+def find(l,r,x):
+    cnt=0
+    while x:
+        if x == r or x == l:
+            return cnt
+        c=(l+r)//2
+        if x>=c:
+            l=c
+        else:
+            r=c
+        cnt+=1
+
+T=int(input())
+for t in range(T):
+    P,A,B=map(int,input().split())
+    a=find(1,P,A)
+    b=find(1,P,B)
+    if a>b:
+        print(f"#{t+1} B")
+    elif a<b:
+        print(f"#{t+1} A")
+    else:
+        print(f"#{t+1} 0")

@@ -1,0 +1,319 @@
+1. 소방차
+# def dfs(pos,temp) :
+#     global my_min
+#     if temp > my_min :
+#         return
+#     if pos >= f :
+#         if my_min > temp :
+#             my_min = temp
+#         return
+#     for i in range(pos,pos+p-f+1) :
+#         if visited[i] :
+#             item = abs(fire[pos]-pump[i])
+#             temp += item
+#             visited[i] = 0
+#             dfs(pos+1,temp)
+#             temp -= item
+#             visited[i] = 1
+#
+
+def search():
+    global my_min
+    temp = 0
+    __fire = _fire[:]
+    _visited = visited[:]
+    temp1 = 0
+    while __fire:
+        # if flag :
+        #     item = _fire.pop(0)
+        # else :
+        if my_min < temp1:
+           break
+        item = __fire.pop()
+        i = item
+        j = item
+        while i > 0:
+            i -= 1
+            if _visited[i] < 0:
+                break
+        while j < p + f + 1:
+            j += 1
+            if _visited[j] < 0:
+                break
+        t1 = abs(pump[item] - pump[i])
+        t2 = abs(pump[item] - pump[j])
+        if t1 < t2:
+            temp1 += t1
+            _visited[i] = 1
+        else:
+            temp1 += t2
+            _visited[j] = 1
+    if my_min > temp1 :
+        my_min = temp1
+    # print(temp1,temp)
+
+#소방차
+p,f = map(int,input().split())
+pump = list(map(int,input().split()))
+fire = list(map(int,input().split()))
+_fire = []
+visited = [-1] * (p+f+2)
+
+my_min = 98881000000
+cnt = 0
+flag = True
+for i in fire :
+    while True :
+        if cnt == len(pump) :
+            pump.append(i)
+            _fire.append(cnt+1)
+            visited[cnt+1] = 1
+            flag = False
+            break
+        if i > pump[cnt] :
+            cnt += 1
+        else :
+            pump.insert(cnt,i)
+            _fire.append(cnt+1)
+            visited[cnt+1] = 1
+            cnt+=1
+            break
+pump.append(98881000000)
+pump.insert(0,98881000000)
+for i in range(f+1) :
+    item = _fire.pop(0)
+    search()
+    _fire.append(item)
+# print(pump)
+# print(_fire)
+
+print(my_min)
+
+
+2. 오목
+
+#오목
+def bfs(data,flag) :
+    n = len(data)
+    visited = [0]*n
+    for i in range(n) :
+        if visited[i] == 0 :
+            chk = 0
+            x2,y2 = data[i]
+            x1,y1 = data[i]
+            visited[i] = 1
+            while True :
+                # print(dx[flag*2])
+                newx = x1+dx[flag*2]
+                newy = y1+dy[flag*2]
+                if (newx,newy) in data:
+                    chk += 1
+                    x1 = newx
+                    y1 = newy
+                    visited[data.index((newx,newy))] = 1
+                else : break
+            while True :
+                newx2 = x2+dx[flag*2 +1]
+                newy2 = y2+dy[flag*2 +1]
+                if (newx2, newy2) in data :
+                    chk += 1
+                    x2 = newx2
+                    y2 = newy2
+                    visited[data.index((newx2, newy2))] = 1
+                else : break
+            if chk == 4 :
+                return (newy2-dy[flag*2 +1]+1,newx2-dx[flag*2 +1]+1)
+    return False
+
+
+
+
+# def set
+my_map = []
+n = 19
+black = []
+white = []
+for i in range(n) :
+    temp = input().split()
+    for j in range(n) :
+        if temp[j] == "1" :
+            white.append((j, i))
+        elif temp[j] == "2" :
+            black.append((j, i))
+
+# for i in range(n) :
+#     for j in range(n) :
+#         if my_map[i][j] == 1 :
+#             white.append((j,i))
+#         elif my_map[i][j] == 2 :
+#             black.append((j,i))
+
+dx = [0,0,1,-1,1,-1,1,-1]
+dy = [1,-1,0,0,1,-1,-1,1]
+chk = 1
+for i in range(4) :
+    item = bfs(white,i)
+    if item :
+        print(1)
+        print(item[0],item[1])
+        chk = 0
+        break
+    item = bfs(black,i)
+    if item :
+        print(2)
+        print(item[0],item[1])
+        chk = 0
+        break
+if chk :
+    print(0)
+# bfs(white,2)
+
+# print((2,3) in white)
+
+
+3.  회문 , atoi , itoa
+s= "reverse this strings"
+rs = ""
+for i in range(len(s)-1,-1,-1) :
+    rs +=s[i]
+print(rs)
+
+# itoa
+
+# 123 = "123"
+def itoa(num) :
+    s = ""
+    while num > 0 :
+        s = chr(num%10+48) + s
+        num//=10
+    return s
+print(itoa(123))
+# atoi
+
+def atoi(s) :
+    t = 0
+    for i in s :
+        i = ord(i)-48
+        if i > 9 :
+            i -=7
+        t *= 16
+        t += i
+    return t
+print(atoi("42FB"))
+
+4. 치즈
+def issafe(x,y) :
+    return x >= 0 and x < m and y >= 0 and y < n and my_map[y][x] >= 0
+
+def search():
+    dx = [0,1,0,-1]
+    dy = [-1,0,1,0]
+    queue = [(0,0)]
+    time = 0
+    chk = 1
+    while chk :
+        queue = [(0, 0)]
+        time += 1
+        while queue :
+
+            x,y = queue.pop(0)
+            my_map[y][x] = -1
+            for i in range(4) :
+                newx = x + dx[i]
+                newy = y + dy[i]
+                if issafe(newx,newy) :
+                    if my_map[newy][newx] == 1 :
+                        my_map[newy][newx] = -2
+                    elif my_map[newy][newx] == 0 :
+                        my_map[newy][newx] = -1
+                        queue.append((newx, newy))
+        chk = 0
+        cnt = 0
+        for j in range(n) :
+            for i in range(m) :
+                if my_map[j][i] == -1 :
+                    my_map[j][i] = 0
+                elif my_map[j][i] == -2 :
+                    cnt += 1
+                    my_map[j][i] = 0
+                elif my_map[j][i] == 1:
+                    chk += 1
+    print(time,cnt)
+my_map = []
+n,m = map(int,input().split())
+for i in range(n) :
+    my_map.append(list(map(int,input().split())))
+search()
+# for i in my_map :
+#     print(i)
+
+5. contact
+def bfs(start):
+    queue = []
+    queue.append(start)
+    distance = [0]*101
+    while queue :
+        item = queue.pop(0)
+        for i in range(101) :
+            if my_map[item][i] > 0 and distance[i] == 0:
+                queue.append(i)
+                distance[i] = distance[item] + 1
+    print(distance)
+    # print(distance[item])
+    for i in range(101) :
+        if distance[100-i] == distance[item] :
+            return 100-i
+def dfs(start) :
+    global max_dis
+    for i in range(1,101) :
+        if my_map[start][i] > 0 and not visited[i]:
+            visited[i] = start
+            if distance[i] > 0 :
+                if distance[i] > distance[start] + 1 :
+                    distance[i] = distance[start] + 1
+            else :
+                distance[i] = distance[start] +1
+            # if distance[i] > distance[start] + 1 :
+            #     distance[i] = distance[start]+1
+            dfs(i)
+            visited[i] = 0
+
+
+for tc in range(10) :
+    n,start = map(int,input().split())
+    my_map = [[0] *101 for i in range(101)]
+    final = 0
+    data = list(map(int,input().split()))
+    distance = [0]*101
+    max_dis = 0
+    pos = 0
+    visited = [0]*101
+    for i in range(n//2) :
+        f,t = data[i*2],data[i*2+1]
+        my_map[f][t] = 1
+    # print(f'#{tc+1} {bfs(start)}')
+    distance[start] = 0
+    dfs(start)
+    #
+    # print(max_dis)
+    # print(distance)
+    for i in range(101):
+        if distance[100 - i] > max_dis :
+            max_dis = distance[100-i]
+            pos = 100-i
+    print
+    print(f'#{tc+1} {pos}')
+
+6. 수도요금
+for a in range(int(input())):
+    p,q,r,s,w=list(map(int,input().split()))
+    b=0
+    if r >= w :
+        b=q
+    else :
+        b=q+(w-r)*s
+    if p*w < b :
+        k=p*w
+    else :
+        k=b
+    print(f'#{a+1} {k}')

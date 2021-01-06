@@ -1,0 +1,24 @@
+import sys
+
+sys.stdin = open('input.txt', 'r') # 파일에서 읽을 때 사용
+
+def GetDiff(Data, n):
+    maxV = Data[0]
+    minV = Data[0]
+
+    for i in range(1, n):
+        if Data[i] > maxV : maxV = Data[i]
+        if Data[i] < minV: minV = Data[i]
+
+    return maxV-minV
+
+T = int(input())
+for tc in range(1, T+1):
+    N = int(input())
+    Data = list(map(int, input().split()))
+
+    print("#%d" %tc, GetDiff(Data, N))
+
+   
+
+

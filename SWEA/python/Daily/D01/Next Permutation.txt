@@ -1,0 +1,31 @@
+import sys
+
+sys.stdin = open('input.txt', 'r') # 파일에서 읽을 때 사용
+
+
+
+def next_permutation(Data):
+    cand1 = 0
+    for now in range(len(Data)-1):
+        if Data[now] < Data[now+1] : cand1 = now
+
+    if cand1 == 0 : return False
+
+    cand2 = len(Data) -1
+
+    while Data[cand1] > Data[cand2] : cand2-=1
+
+    Data[cand1], Data[cand2] = Data[cand2] , Data[cand1]
+    Data[cand1+1:] = Data[:cand1:-1]
+    return(Data)
+
+
+Data = []
+Data = list(map(int, input().split()))
+
+
+if next_permutation(Data) : print(Data)
+else : print("마지막 순열입니다.")
+
+
+

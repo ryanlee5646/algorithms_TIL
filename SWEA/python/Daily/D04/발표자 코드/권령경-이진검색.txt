@@ -1,0 +1,39 @@
+import sys
+
+sys.stdin = open("binary_input.txt", "r")
+
+T = int(input())
+
+
+def binary_search(book, key):
+    cnt = 0
+    start = 1
+    end = pages
+    while start <= end:
+        middle = (start + end) // 2
+        if middle == key:
+            cnt += 1
+            break
+        elif middle > key:
+            end = middle
+            cnt += 1
+        else:
+            start = middle
+            cnt += 1
+    return cnt
+
+
+def compare(first, second):
+    result = 'B'
+    if first == second:
+        return 0
+    elif first < second:
+        result = 'A'
+    return result
+
+
+for test_case in range(1, 1+T):
+    pages, a, b = map(int, (input().split()))
+    A = binary_search(pages, a)
+    B = binary_search(pages, b)
+    print(f'#{test_case} {compare(A, B)}')

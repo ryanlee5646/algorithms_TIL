@@ -1,0 +1,33 @@
+1. È¸¹®
+s = 'Algorithm'
+a = ['0'] * len(s)
+for i in range(len(s)//2):
+    a[i], a[len(s)-1-i] = s[len(s)-1-i], s[i]
+if len(s) % 2:
+    a[len(s)//2] = s[len(s)//2]
+print(''.join(a))
+
+2. itoa
+n = 123
+i = 0
+while n // (10 ** i) > 0:
+    i += 1
+length = i
+s = ''
+for i in range(length-1, -1, -1):
+    now = n // 10 ** i
+    s = s + str(now)
+    n = n % 10 ** i
+print(s)
+
+3. atoi
+s = '42FB'
+val = 0
+for i in s:
+    if i.isdigit():
+        val *= 16
+        val += int(i)
+    else:
+        val *= 16
+        val += ord(i) - ord('A') + 10
+print(val)

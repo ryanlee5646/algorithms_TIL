@@ -1,0 +1,261 @@
+## 1. snail
+import sys
+sys.stdin = open("input.txt","r")
+
+INPUT=[]
+for i in range(5):
+    data = list(map(int, input().split()))
+    INPUT.append(data)
+
+checker =[]
+
+temp=[]
+for yy in range(0, len(INPUT)):
+    for xx in range(0,len(INPUT[0])):
+        temp.append(0)
+    checker.append(temp)
+    temp=[]
+
+def issafe(Y,X):
+    if (Y < len(INPUT) and Y >=0) and (X <len(INPUT[0]) and X>=0) and checker[Y][X] != 1:
+        return True
+    else:
+        return False
+
+dy = [0,1,0,-1]
+dx = [1,0,-1,0]
+#       ??->??->??->??
+# dir = 0   1   2   3
+
+rotate=[]
+def dalpaengE(Y,X,DATA):
+    dir=0
+
+    Y=0
+    X=0
+    checker[Y][X] = 1
+    num=0
+    while(1):
+        # print(f"{Y},{X}")
+        if len(rotate)<len(DATA)*len(DATA[0]):
+            rotate.append((Y,X))
+        if(X==len(DATA[0])//2 and Y==len(DATA)//2):
+            break
+
+        returned=0
+        while(1):
+            prev_Y=Y
+            prev_X=X
+            
+            if issafe(Y+dy[dir], X+dx[dir]):
+                Y=Y+dy[dir]
+                X=X+dx[dir]
+                checker[Y][X] = 1
+            else:
+                if(dir==3):
+                    dir=0
+                    if(returned==1):
+                        break
+                    returned=1
+                else:
+                    dir=dir+1
+            if (Y!=prev_Y) or (X!=prev_X):
+                break
+            num=num+1
+    return DATA
+
+dalpaengE(0,0,INPUT)
+
+for R in range(0,len(rotate)):
+    for r in range(R,len(rotate)):
+        if INPUT[rotate[R][0]][rotate[R][1]] > INPUT[rotate[r][0]][rotate[r][1]]:
+             INPUT[rotate[r][0]][rotate[r][1]], INPUT[rotate[R][0]][rotate[R][1]] = INPUT[rotate[R][0]][rotate[R][1]] , INPUT[rotate[r][0]][rotate[r][1]]
+
+print(INPUT)
+
+## 2. 색칠하기
+import copy
+T=int(input())
+for t in range(1,T+1):
+    map_sell=[[0 for j in range(10)] for i in range(10)]
+    
+    red_nation = copy.deepcopy(map_sell)
+    blue_nation = copy.deepcopy(map_sell)
+    
+    N = int(input())
+    
+    
+    def color_red(L):
+        for y in range(L[0],L[2]+1):
+            for x in range(L[1],L[3]+1):
+                red_nation[y][x] = 1
+    
+    def color_blue(L):
+        for y in range(L[0],L[2]+1):
+            for x in range(L[1],L[3]+1):
+                blue_nation[y][x] = 2
+    
+    for n in range(0,N):
+        info = list(map(int,input().split()))# [좌y,좌x,우y,우x,nation]
+        if info[4] == 1:
+            color_red(info)
+        if info[4] == 2:
+            color_blue(info)
+    
+    count_purple=0
+    
+    for y in range(0,10):
+        for x in range(0,10):
+            if red_nation[y][x]+blue_nation[y][x] == 3:
+                count_purple = count_purple +1
+    print(f"#{t} {count_purple}")
+
+## 3. 부분집합
+T=int(input())
+for t in range(1,T+1):
+    inputt = list(map(int, input().split()))
+    N=inputt[0]
+    K=inputt[1]
+    data=[1,2,3,4,5,6,7,8,9,10,11,12]
+    temp=[]
+
+    answer=0
+    n = 12
+    for i in range(1<<n): # 000000000000 ~ 1000000000000
+        for j in range(n): # 0 ~ 11
+            if (i & 1<<j):
+                temp.append(data[j])
+        if(sum(temp)==K):
+            if(len(temp)==N):
+                answer=answer+1
+        temp = []
+
+    print(f"#{t} {answer}")
+
+## 4. 이진검색
+T = int(input())
+for t in range(1,T+1):
+    def BS(data, select):
+        start = 0
+        end = len(data)-1
+        ccount=0
+        while (1):
+            ccount = ccount+1
+            mid = int((start+end)/2)
+            if (data[start]==select or data[end]==select):
+                return ccount
+            elif(data[mid]>select):
+                end = mid
+            else: ## mid<select
+                start = mid
+
+           
+            
+    book=[]
+
+
+    data = list(map(int,input().split()))
+    n = data[0]
+    A = data[1]
+    B = data[2]
+
+    for i in range(1,n+1):
+        book.append(i)
+
+    # print(BS(book,A))
+    # print(BS(book,B))
+    winner=''
+    a = BS(book,A)
+    b = BS(book,B)
+    if a > b:
+        winner='B'
+    elif a<b:
+        winner='A'
+    else:
+        winner=0
+    print(f"#{t} {winner}")
+
+## 5. 특별한 정렬
+T=int(input())
+for t in range(1,T+1):
+    trash = int(input())
+    data = list(map(int,input().split()))
+    data.sort()
+    data2 = data[:]
+    data2.sort(reverse=True)
+    answerr=[]
+    i=0
+    while(len(answerr)!=len(data)):
+        answerr.append(data2[i])
+        answerr.append(data[i])
+        i=i+1
+    
+    answer=''
+    for i in range(0,10):
+        answer = answer + str(answerr[i]) + " "
+    print(f"#{t} {answer}")
+
+## 6. 금속막대
+
+T=int(input())
+for t in range(1,T+1):
+    trash = input()
+    data = list(map(int,input().split()))
+
+    V=[]
+    N=[]
+    for i in range(0,len(data)//2):
+        i=2*i
+        V.append(data[i])
+    for i in range(0,len(data)//2):
+        i=2*i+1
+        N.append(data[i])
+    checker=[0]*len(V)
+    min_index=N.index(min(N))
+
+    V[min_index], V[0] = V[0], V[min_index]
+    N[min_index], N[0] = N[0], N[min_index]
+    checker[0]=1
+    def find_Volt(VOLT_LIST,n):
+        for i in range(1,len(VOLT_LIST)):
+            if VOLT_LIST[i] == n:
+                return i
+        return False
+
+    for i in range(0,len(V)):
+        if (find_Volt(V,N[i])==False):
+            break
+        next_v=find_Volt(V,N[i])  # 1
+        V[i+1],V[next_v]=V[next_v], V[i+1]
+        N[i+1],N[next_v]=N[next_v], N[i+1] ## 일단 오름차순
+        checker[i+1]=1
+    # print(checker)
+
+    while(1):
+        escape=0
+        for i in range(0,len(V)):
+            if checker[i]==1:
+                continue
+            if(V[0]==N[i]):
+                escape=1
+            
+        if (escape==0):
+            break
+
+        for i in range(0,len(V)):
+            if checker[i]==1:
+                continue
+            if V[0]==N[i]:
+                V.insert(0,V[i])
+                N.insert(0,N[i])
+                V.pop(i+1)
+                N.pop(i+1)
+    answer=[]
+    for i in range(0,len(N)):
+        answer.append(V[i])
+        answer.append(N[i])
+    answer_t=''
+    for i in range(0,len(N)*2):
+        answer_t = answer_t + str(answer[i]) + " "
+    print(f"#{t} {answer_t}")
+

@@ -1,0 +1,156 @@
+
+# 미로의 거리
+dy=[0,0,-1,1]
+dx=[-1,1,0,0]
+def IsPossible(y, x):
+    if -1<y<N and -1<x<N and not visited[y][x] and A[y][x]!=1:
+        return True
+    else:
+        return False
+
+def BFS(y,x):
+    global front,rear
+    Que.append([y,x])
+    visited[y][x]=True
+    distance[y][x]+=1
+    rear+=1
+    while Que or front!=rear:
+        y,x= Que[front][0], Que[front][1]
+        for dir in range(4):
+            if IsPossible(y+dy[dir],x+dx[dir]):
+                newY = y+dy[dir]
+                newX = x+dx[dir]
+                Que.append([newY,newX])
+                visited[newY][newX]=True
+                distance[newY][newX]=distance[y][x]+1
+                rear+=1
+        if A[Que[rear][0]][Que[rear][1]]==3:
+            print(f'#{n+1} {distance[Que[rear][0]][Que[rear][1]] - 1}')
+            break
+        if front==rear:
+            print(f'#{n+1} 0')
+            break
+        front+=1
+TC=int(input())
+for n in range(TC):
+    N=int(input())
+    A=[list(map(int,input()))for y in range(N)]
+    Que=[]
+    front=0
+    rear=-1
+    visited=[[0 for x in range(N)] for _ in range(N)]
+    distance=[[-1 for x in range(N)] for _ in range(N)]
+    for start in range(N):
+        for start1 in range(N):
+            if A[start][start1] == 2:
+                BFS(start, A[start].index(2))
+                break
+
+
+# 수도 요금 경쟁
+N=int(input())
+for n in range(N):
+    L=[int(x) for x in input().split()]
+    A=L[0]*L[4]
+    B=0
+    if L[4]<=L[2]:
+        B=L[1]
+    else:
+        B=L[1]+(L[4]-L[2])*L[3]
+    print(f'#{n+1} {min(A,B)}')
+
+# Contact - BFS
+def BFS(x):
+    global front,rear
+    Q.append(x)
+    V[x]=1
+    while front!=rear:
+        front+=1
+        x=Q[front]
+        for n in range(N[0]):
+            if map[x][n] and not V[n]:
+                Q.append(n)
+                V[n]=1
+                D[n]=D[x]+1
+                rear+=1
+    for r in range(len(D)-1,0,-1):
+        if D[r]==max(D):
+            print(f'#{R+1} {r}')
+            break
+for R in range(10):
+    N=[int(x) for x in input().split()]
+    L=[int(x) for x in input().split()]
+    Q=[]
+    front,rear=-1,0
+    V=[0]*(N[0]+1)
+    D=[0]*(N[0]+1)
+    map=[[0]*(N[0]+1) for i in range((N[0]+1))]
+    for i in range(0,len(L),2):
+        Start=L[i]
+        Stop=L[i+1]
+        map[Start][Stop]=1
+    BFS(N[1])
+
+Contact - DFS
+
+# 소방차
+PF=[int(x) for x in input().split()]
+P=[int(x) for x in input().split()]
+F=[int(x) for x in input().split()]
+result=0
+if PF[0]==PF[1]:
+    print(sum(P[n]-F[n] for n in range(PF[0])))
+elif PF[0]-PF[1]:
+
+
+# 오목
+dy=[1,1,1,0]
+dx=[-1,0,1,1]
+def IsPossible(y, x):
+    if -1<y<N and -1<x<N and A[y][x]!=0:
+        return True
+    else:
+        return False
+def omok(y,x):
+    global cnt
+    if cnt==5:
+        print(f'{A[y][x]}')
+        print(cnt)
+        return
+    # for dir in range(4):
+    if IsPossible(y+dy[2],x+dx[2]) and A[y][x]==A[y+dy[2]][x+dx[2]]:
+        newY = y+dy[2]
+        newX = x+dx[2]
+        while A[y][x]==A[newY][newX]:
+            cnt+=1
+            omok(newY,newX)
+
+N=19
+A=[[int(x) for x in input().split()]for y in range(N)]
+
+for y in range(N):
+    for x in range(N):
+        cnt = 1
+        if A[y][x]:
+            omok(y,x)
+        if cnt==5:
+            print(f'{y+1} {x+1}')
+            break
+
+
+# str
+data=list(input())
+howmany=len(data)-1
+for c in range(howmany//2+1):
+    data[c],data[howmany-c]=data[howmany-c],data[c]
+
+print(data)
+
+itoa
+Data=int(input())
+a = Data//10
+b = Data%10
+
+print(chr(ord('0')+a)+chr(ord('0')+b))
+
+atoi

@@ -1,0 +1,68 @@
+#1. reverse
+
+def reversestring(string):
+
+    stack = []
+    result = ''
+
+    for i in string:
+        stack.append(i)
+
+    for i in range(len(string)):
+        result += stack.pop()
+    return result
+
+def reversing(string):
+    string_stack = []
+    swap = ''
+    for i in string:
+        string_stack.append(i)
+
+    for n in range(len(string)//2):
+        start = n
+        end = len(string_stack) - n - 1
+        swap = string[start]
+        string_stack[start] = string_stack[end]
+        string_stack[end] = swap
+
+    string = "".join(string_stack)
+
+    return string
+
+print(reversestring('reverse'))
+print(reversing('reverse'))
+
+#2. itoa
+
+def itoa(num):
+
+    int_stack = []
+
+    while num / 10:
+        int_stack.append(num % 10)
+        num //= 10
+
+    result = ''
+    for i in range(len(int_stack)):
+        result += chr(int_stack[len(int_stack) - 1 - i] + 48)
+
+    return result
+
+print(itoa(123))
+
+#3. atoi
+
+def atoi(string):
+    string_stack = []
+    result = 0
+    for c in string:
+        string_stack.append(c)
+
+    for i in range(len(string_stack)):
+        if string_stack[i].isalpha():
+            string_stack[i] = ord(string_stack[i]) - ord('A') + 10
+
+        result += int(string_stack[i]) * 16 ** (len(string_stack) - 1 - i)
+
+    return result
+print(atoi('42FB'))

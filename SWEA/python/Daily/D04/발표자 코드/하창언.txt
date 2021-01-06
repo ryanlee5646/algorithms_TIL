@@ -1,0 +1,41 @@
+def solve(inputmetal):
+    result = [0]
+    startM = inputmetal[0][0]   # 시작위치는 처음 나사; 결합될 경우 결합된것의 숫나사로 위치 변경
+    startW = inputmetal[0][1]
+    metal = 0
+    while metal<len((inputmetal)):      # 시작나사의 숫나사부터 연결을 시작하여 가능할 때까지 연결; breakpoint = 연결된 나사가 없다; 연결될 경우 시작 숫나사 변경 후 처음부터 다시
+        if startM == inputmetal[metal][1]:
+            result.insert(0,metal)
+            startM = inputmetal[metal][0]
+            metal = 0
+        metal+=1
+    metal = 0
+    while metal<len((inputmetal)):      # 시작나사의 암나사부터 ~
+        if startW == inputmetal[metal][0]:
+            result.append(metal)
+            startW = inputmetal[metal][1]
+            metal = 0
+        metal+=1
+    return result       #  result 에 나사가 연결된 순서가 저장됨 [1,0,2 ..]
+### 
+예시 1
+3
+3 4 2 3 4 5
+###
+가정
+1. 같은 종류의 나사는 숫자 중복 불가
+2. 모든 나사는 결합 가능
+###
+
+casesize = int(input())
+for cs in range(casesize):
+    metalsize = int(input())
+    caseinfo = list(map(int,input().split()))      # 나사 전체를 리스트로
+    inputmetal = []     #[(3,4),(2,3),(4,5)]
+    for metal in range(metalsize):
+        inputmetal.append((caseinfo[0+metal*2],caseinfo[1+metal*2]))        # tuple 의 형태로 변경
+    result = solve(inputmetal)
+    print(f'#{cs+1}',end=" ")
+    for re in result:
+        print(inputmetal[re][0],inputmetal[re][1],end=" ")
+    print()
