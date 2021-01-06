@@ -1,1 +1,1 @@
-# TIL_algorithm
+# algorithm
