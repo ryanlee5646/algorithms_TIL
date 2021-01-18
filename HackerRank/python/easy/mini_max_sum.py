@@ -8,8 +8,8 @@ import sys
 import time
 start = time.time()
 # READ input File
-# sys.stdin = open('input/MiniMaxSum1.txt', 'r')
-sys.stdin = open('input/MiniMaxSum2.txt', 'r')
+# sys.stdin = open('input/mini_max_sum1.txt', 'r')
+sys.stdin = open('input/mini_max_sum2.txt', 'r')
 
 # Complete the miniMaxSum function below.
 def miniMaxSum(arr):

@@ -1,6 +1,6 @@
 import sys
 print(sys.path)
-sys.stdin = open('input/plusMinus1.txt','r')
+sys.stdin = open('input/plus_minus1.txt', 'r')
 
 def plusMinus(arr):
     positive = negative = zero = 0

@@ -14,7 +14,7 @@ start = time.time()
 # The function is expected to return an INTEGER.
 # The function accepts INTEGER_ARRAY candles as parameter.
 #
-sys.stdin = open("input/BirthdayCakeCandles.txt", "r")
+sys.stdin = open("input/birthday_cake_candles.txt", "r")
 
 # Solution 1
 def birthdayCakeCandles(candles):

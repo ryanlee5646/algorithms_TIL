@@ -3,7 +3,7 @@
 import os
 import sys
 
-sys.stdin = open("input/TimeConversion.txt", "r")
+sys.stdin = open("input/time_conversion.txt", "r")
 #
 # Complete the timeConversion function below.
 #
