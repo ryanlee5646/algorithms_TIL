@@ -1,5 +1,5 @@
-# 1480. Running Sum of 1d Array
-
+# 1480.  Running Sum of 1d Array
+#
 class Solution(object):
     def runningSum(self, nums):
         result = []
