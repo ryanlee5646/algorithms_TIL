@@ -1,5 +1,7 @@
 
 new_id = '...!@BaT#*..y.abcdefghijklm..'
+
+# 풀이 1
 def solution(new_id):
     # 1단계
     new_id = new_id.lower()
@@ -25,5 +27,21 @@ def solution(new_id):
     if len(answer) <= 3:
         answer = answer + answer[-1] * (3-len(answer))
     return answer
+
+# 풀이 2
+# import re
+
+# def solution(new_id):
+#     st = new_id
+#     st = st.lower()
+#     st = re.sub('[^a-z0-9\-_.]', '', st)
+#     st = re.sub('\.+', '.', st)
+#     st = re.sub('^[.]|[.]$', '', st)
+#     st = 'a' if len(st) == 0 else st[:15]
+#     st = re.sub('^[.]|[.]$', '', st)
+#     st = st if len(st) > 2 else st + "".join([st[-1] for i in range(3-len(st))])
+#     return st
+
+
 
 solution(new_id)
