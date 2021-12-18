@@ -44,4 +44,5 @@ def solution(new_id):
 
 
 
-solution(new_id)
+a = solution(new_id)
+print(a)
