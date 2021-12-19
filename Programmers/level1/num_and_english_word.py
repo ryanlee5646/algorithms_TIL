@@ -1,3 +1,5 @@
+# 숫자 문열과 영단어
+
 s = 'one4seveneight'
 words = {"zero":0, "one":1, "two":2, "three":3,
              "four":4, "five":5, "six":6, "seven":7,

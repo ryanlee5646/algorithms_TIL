@@ -1,3 +1,4 @@
+# Level1 신규 아이디 추ㄴ
 
 new_id = '...!@BaT#*..y.abcdefghijklm..'
 

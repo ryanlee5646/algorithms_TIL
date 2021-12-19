@@ -1,3 +1,5 @@
+# Level1 키패드 누르기
+
 def distance_count(index, number_index):
     result = abs(index[0] - number_index[0]) + abs(index[1] - number_index[1])
     return result
