@@ -1,4 +1,4 @@
-# 모의고사
+# Level1 모의고사
 
 # 비교배열 개수
 def arr_count(answers, type):

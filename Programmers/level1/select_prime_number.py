@@ -1,4 +1,4 @@
-# 소수 찾기
+# level1 소수 찾기
 
 def prime_number(num):
     arr = [True] * (num+1)

@@ -1,4 +1,4 @@
-# 문자열 내 p와 y의 개수
+# Level1 문자열 내 p와 y의 개수
 
 # 방법 1
 def solution(s):

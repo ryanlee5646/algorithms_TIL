@@ -1,4 +1,4 @@
-# 숫자 문열과 영단어
+# Level1 숫자 문열과 영단어
 
 s = 'one4seveneight'
 words = {"zero":0, "one":1, "two":2, "three":3,
