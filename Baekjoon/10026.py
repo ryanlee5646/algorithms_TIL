@@ -1,4 +1,5 @@
 from collections import deque
+import sys
 
 def BFS(x, y):
     queue.append([x, y])
@@ -14,7 +15,7 @@ def BFS(x, y):
                     visit[nx][ny] = 1
 
 N = int(input())
-data = [list(map(str, input())) for _ in range(N)]
+data = [list(map(str, sys.stdin.readline())) for _ in range(N)]
 visit = [[0]*N for _ in range(N)]
 queue = deque()
 dx = [1, -1, 0, 0]
@@ -28,7 +29,7 @@ for i in range(N):
             BFS(i, j)
             cnt += 1
 print(cnt, end=' ')
-print(visit)
+
 for i in range(N):
     for j in range(N):
         if data[i][j] == 'R':
@@ -42,4 +43,3 @@ for i in range(N):
             BFS(i, j)
             cnt += 1
 print(cnt)
-print(visit)
