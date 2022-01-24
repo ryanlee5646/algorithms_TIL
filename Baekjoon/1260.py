@@ -8,7 +8,7 @@ read = sys.stdin.readline # input값 빠르게 받기
 def DFS(start):
     dfs_visit[start] = 1
     print(start, end=" ")
-    for i in range(1,N+1):
+    for i in range(1, N+1):
         if dfs_visit[i] == 0 and data[start][i] == 1:
             DFS(i)
             
@@ -16,17 +16,15 @@ def DFS(start):
 def BFS(start):
     queue = deque()
     queue.append(start)
-    bfs_visit[start] == 1
+    bfs_visit[start] = 1
     while queue:
-        # print(queue)
         start = queue.popleft()
         print(start, end = " ")
         for i in range(1, N+1):
-            if bfs_visit[start] == 0 and data[start][i] == 1:
+            if bfs_visit[i] == 0 and data[start][i] == 1:
                 queue.append(i)
                 bfs_visit[i] = 1
     
-
 N, line, start = map(int, read().split())
 # 정점이 1부터 시작하므로 N+1로 설정
 data = [[0] * (N+1) for _ in range(N+1)] 
@@ -38,7 +36,6 @@ for _ in range(line):
     x,y = map(int, read().split())
     # 간선 양방향
     data[x][y] = data[y][x] = 1
-
 
 DFS(start)
 print()
