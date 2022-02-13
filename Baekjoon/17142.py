@@ -23,6 +23,6 @@ for y in range(N):
             virus_locate.append([y,x])
 # 바이러스 조합
 virus_combination = list(combinations(virus_locate, virus_num))
-
+print(virus_combination)
 
 
