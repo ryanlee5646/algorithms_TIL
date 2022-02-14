@@ -1,10 +1,8 @@
-# N과 M(1)
+# N과 M(1) - 순열
 from sys import stdin
 input = stdin.readline
 
 ## 풀이 1 ##
-# 순열 출력값
-tmp = []
 def permutation():
     if len(tmp) == M:
         print(' '.join(map(str, tmp)))
@@ -18,10 +16,12 @@ def permutation():
 
 N, M = map(int, input().split())
 data = [i for i in range(1, N+1)]
+# 순열 출력값
+tmp = []
 permutation()
 
 ## 풀이 2 ##
-# 순열 출력값
+
 def permutation(depth, N, M):
     if len(tmp) == M:
         print(' '.join(map(str, tmp)))
