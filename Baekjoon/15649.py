@@ -22,7 +22,7 @@ input = stdin.readline
 
 ## 풀이 2 ##
 
-def permutation(depth, N, M):
+def permutation(depth):
     if len(tmp) == M:
         print(' '.join(map(str, tmp)))
         return
@@ -30,7 +30,7 @@ def permutation(depth, N, M):
         if not visited[i]:
            visited[i] = 1
            tmp.append(data[i])
-           permutation(depth+1, N, M)
+           permutation(depth+1)
            visited[i] = 0 # 끝까지 탐색 했으면 빼
            tmp.pop()
  
@@ -38,7 +38,7 @@ N, M = map(int, input().split())
 data = [i for i in range(1, N+1)]
 visited = [0] * N
 tmp = []
-permutation(0, N, M)
+permutation(0)
 
 ## 풀이3 ##
 # itertools이용 permutation 
