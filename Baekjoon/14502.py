@@ -11,7 +11,8 @@ def combination(start):
         if not visited[i]:
             visited[i] = 1
             tmp.append(blanks[i])
-            combination(i+1)
+            combination(start+1)
+            visited[i] = 0
             tmp.pop()
         
 # 방향(상, 하, 좌, 우)

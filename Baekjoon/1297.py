@@ -1,6 +1,4 @@
-
 # TV 크기
-
 cross, h_rate, w_rate = map(int, input().split())
 
 # 대각선 비율 구하기

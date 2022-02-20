@@ -1,3 +1,4 @@
+# 피보나치 함수(DP)
 from sys import stdin
 
 input = stdin.readline
