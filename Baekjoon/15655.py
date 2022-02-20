@@ -16,8 +16,7 @@ def combinations(start):
             visited[i] = 0
 
 N, M = map(int, input().split())
-data = list(map(int, input().split()))
-data.sort()
+data = sorted(list(map(int, input().split())))
 tmp = []
 visited = [0] * N
 combinations(0)

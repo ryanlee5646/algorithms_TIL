@@ -18,7 +18,7 @@ def combinations(start):
         tmp.pop()
 
 N, M = map(int, input().split())
-data = list(map(int, input().split()))
+data = sorted(list(map(int, input().split())))
 data.sort()
 tmp = []
 visited = [0] * N

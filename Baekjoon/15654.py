@@ -15,9 +15,7 @@ def permutation(start):
             tmp.pop() 
      
 N, M = map(int, input().split())
-data = list(map(int, input().split()))
-data.sort()
+data = sorted(list(map(int, input().split())))
 tmp = []
 visited = [0] * N
-
 permutation(0)
