@@ -1,4 +1,4 @@
-# 연구소1
+# 연구소1(시간초과나노..)
 from collections import deque
 from copy import deepcopy
 from sys import stdin
