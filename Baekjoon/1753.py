@@ -3,10 +3,10 @@ from sys import stdin
 input = stdin.readline
 
 def Dijkstra(start):
-    
+    min_value = int(1e9)
+    index = 0
     return
     
-
 # 노드수, 간선수
 N, M = map(int, input().split())
 start = int(input())
