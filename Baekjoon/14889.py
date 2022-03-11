@@ -1,12 +1,19 @@
-# 스타트와 링크
+# 스타트와 링크(시간초과 단계를 줄여야할듯)
 from sys import stdin
+from itertools import permutations
 input = stdin.readline
 
 def min_value_cal(start, link):
     global min_value
-    start_value = S[start[0]][start[1]] + S[start[1]][start[0]]
-    link_value = S[link[0]][link[1]] + S[link[1]][link[0]]
+    # 각팀의 순열 구하기
+    start_list = list(permutations(start, 2))
+    link_list = list(permutations(link, 2))
+    # 각각 팀의 값 구하기
+    start_value = sum(S[i][j] for i, j in start_list)
+    link_value = sum(S[i][j] for i, j in link_list)
+    # 각 팀의 차이값 구하기
     result = abs(start_value - link_value)
+    # 최소값 구하기
     min_value = min(min_value, result)
     return 
 
@@ -15,11 +22,11 @@ def combination(depth):
         start = []
         link = []
         for i, j in enumerate(visited):
-            print(f"index:{i} value:{j}")
             if j == 1:
                 start.append(i)
             else:
-                link.append(j)
+                link.append(i)
+                
         min_value_cal(start, link)
         
     for i in range(depth, N):
