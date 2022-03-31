@@ -16,26 +16,6 @@ def roll(course):
   
     return dice[0]
 
-# def roll_dice(i):
-#     global now_y, now_x
-#     ny = now_y + dy[i]
-#     nx = now_x + dx[i]
-#     # 주사위가 맵 범위를 벗어나지 않는다면
-#     if 0 <= ny and ny < n  and 0 <= nx and nx < m:
-#         # 맵에 칸이 0이라면 주사위 밑면(돌리기전)을 찍어주기
-#         roll(i)
-#         if graph[ny][nx] == 0:     
-#             graph[ny][nx] = dice[5]
-
-#         # 맵에 칸이 0이 아니라면 
-#         else:
-#             dice[5] = graph[ny][nx]
-#             graph[ny][nx] = 0   
-#         now_y = ny
-#         now_x = nx
-#         print(dice[0])
-#     return 
-
 n, m, x, y, k = map(int, input().split())
 graph = [list(map(int, input().split())) for i in range(n) ]
 
