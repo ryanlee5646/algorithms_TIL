@@ -3,6 +3,7 @@ from sys import stdin
 from collections import deque
 input = stdin.readline
 
+# 굴리기
 def roll(direction):
     if direction == 1: # 동쪽
         dice[0], dice[2], dice[5], dice[3] = dice[3], dice[0], dice[2], dice[5]
@@ -13,6 +14,7 @@ def roll(direction):
     else: # 북쪽
         dice[0], dice[1], dice[5], dice[4] = dice[4], dice[0], dice[1], dice[5]
 
+# 다음방향 결졍
 def next_direction(direction, ny, nx):
     if dice[5] > graph[ny][nx]:
         if direction == 1: # 동 -> 남
@@ -23,7 +25,7 @@ def next_direction(direction, ny, nx):
             direction = 4
         else:   # 북 -> 동
             direction = 1    
-    elif dice[5] > graph[ny][nx]:
+    elif dice[5] < graph[ny][nx]:
         if direction == 1: # 동 -> 북
             direction = 4
         elif direction == 4: # 북 -> 서
@@ -34,21 +36,23 @@ def next_direction(direction, ny, nx):
             direction = 1  
     return direction
 
+
 def get_score(nx, ny):
     queue = deque()
     visited = [[0] * m for _ in range(n)]
     queue.append((ny, nx))
     visited[ny][nx] = 1
-    cnt = 1
+    cnt = 0
     while queue:
         y, x = queue.popleft()
         for i in range(1, 5):
             next_x = x + dx[i]
             next_y = y + dy[i]
             if not 0 <= next_x < m and 0 <= next_y < n:
-                contin
+                continue
             if not visited[next_y][next_x] and graph[next_y][next_x] == graph[ny][nx]:
                 cnt+=1
+                visited[next_y][next_x] = 1
                 queue.append((next_y, next_x))
     return cnt    
     
