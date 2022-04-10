@@ -1,8 +1,10 @@
 # 주사위 굴리기2
 from sys import stdin
 from collections import deque
+import sys
+sys.setrecursionlimit(10**7)
 input = stdin.readline
-
+# dice = [1, 2, 3, 4, 5, 6] # 위, 뒤, 오른쪽, 왼쪽, 앞, 아래
 # 굴리기
 def roll(direction):
     if direction == 1: # 동쪽
@@ -48,7 +50,7 @@ def get_score(nx, ny):
         for i in range(1, 5):
             next_x = x + dx[i]
             next_y = y + dy[i]
-            if not 0 <= next_x < m and 0 <= next_y < n:
+            if not (0 <= next_x < m and 0 <= next_y < n):
                 continue
             if not visited[next_y][next_x] and graph[next_y][next_x] == graph[ny][nx]:
                 cnt+=1
@@ -65,17 +67,23 @@ def roll_dice(start_x, start_y, move_count, direction):
     nx = start_x + dx[direction]
     ny = start_y + dy[direction] 
     
-    if not 0 <= nx < m and 0 <= ny < n:
+    if not (0 <= nx < m and 0 <= ny < n):
+        nx = start_x - dx[direction]
+        ny = start_y - dy[direction]
         if direction == 1: # 동 -> 서
+            direction = 2
             nx = start_x + dx[2]
             ny = start_y + dy[2]
         elif direction == 2: # 서 -> 동
+            direction = 1
             nx = start_x + dx[1]
             ny = start_y + dy[1]
         elif direction == 3: # 남 -> 북
+            direction = 4
             nx = start_x + dx[4]
             ny = start_y + dy[4]
         else: # 북 -> 남
+            direction = 3
             nx = start_x + dx[3]
             ny = start_y + dy[3]
     # 이동한 칸의 점수 획득
