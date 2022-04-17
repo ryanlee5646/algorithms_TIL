@@ -115,5 +115,5 @@ score = 0
 start_x = 0
 start_y = 0
 
-roll_dice(start_x, start_y, move_count, 1)
+roll_dice(0, 0, move_count, 1)
 print(score)
