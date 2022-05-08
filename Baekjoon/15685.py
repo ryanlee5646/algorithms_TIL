@@ -19,6 +19,9 @@ data = [[0]*101 for _ in range(101)]
 dx = [0, -1, 0, 1]  # 남 서 북 동
 dy = [1, 0, -1, 0]
 
+dx = [1, 0, -1, 0]  # 남 서 북 동
+dy = [0, -1, 0, 1]
+
 for info in infos:
     y, x, d, g = info
     # 커브 구하기
