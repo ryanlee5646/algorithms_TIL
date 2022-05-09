@@ -31,8 +31,8 @@ for info in infos:
     for curve in curves:
         x += dx[curve]
         y += dy[curve]
-        if 0 <= x <= 100 and 0 <= y <= 100:
-            data[y][x] = 1
+        # if 0 <= x <= 100 and 0 <= y <= 100:
+        data[y][x] = 1
 
 # 정사각형 개수 구하기
 result = 0
