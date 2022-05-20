@@ -33,5 +33,8 @@ chess_infos = [list(map(int, input().split())) for _ in range(k)]
 dx = [1, -1, 0, 0]
 dy = [0, 0, -1, 1]
 
+check = [[0]*n for _ in range(n)]
+print(check)
+
 print(graph)
 print(chess_infos)
