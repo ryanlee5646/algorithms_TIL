@@ -25,16 +25,16 @@ y,x,이동방향
 '''
 
 from sys import stdin
+
 input = stdin.readline
 
 n, k = map(int, input().split())
 graph = [list(map(int, input().split())) for _ in range(n)]
+check_map = [[[] for _ in range(n)] for _ in range(n)]
 chess_infos = [list(map(int, input().split())) for _ in range(k)]
 dx = [1, -1, 0, 0]
 dy = [0, 0, -1, 1]
 
-check = [[0]*n for _ in range(n)]
-print(check)
-
 print(graph)
 print(chess_infos)
+print(check_map)
