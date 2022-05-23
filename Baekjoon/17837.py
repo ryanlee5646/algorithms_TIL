@@ -51,13 +51,30 @@ def move(horse_num):
         # 반대방향으로 이동했는데 또 파란색이거나 맵을 벗어 났으면 제자리
         if 0 > nx or nx >= n or 0 > ny or ny >= n or chess_map[ny][nx] == 2:
             return True
-
+    
+    horse_tmp = []
+    for i, j in enumerate(horse_map[y][x]):
+      if j == horse_num:
+        horse_tmp.extend(horse_map[y][x][i:])
+        horse_map[y][x] = horse_map[y][x][:i]
+        break
+    
+    if chess_map[ny][nx] == 1:
+      horse_tmp = horse_tmp[-1::-1]
+    
+    for h in horse_tmp:
+      chess_horse[h][0], chess_horse[h][1] = ny, nx
+      horse_map[ny][nx].append(h)
+      
+    if len(horse_map[ny][nx]) >= 4:
+      return False
+    return True
 
 n, k = map(int, input().split())
 chess_map = [list(map(int, input().split())) for _ in range(n)]
 horse_map = [[[] for _ in range(n)] for _ in range(n)]
-dx = [0, 0, -1, 1]  # 동 서 북 남
-dy = [1, -1, 0, 0]
+dx = [1, -1, 0, 0]  # 동 서 북 남
+dy = [0, 0, -1, 1]
 
 chess_horse = []
 
@@ -82,6 +99,7 @@ while True:
             flag = True
             break
     turn += 1
+    print(horse_map)
     if flag:
         print(turn)
         break
