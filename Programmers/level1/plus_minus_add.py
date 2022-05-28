@@ -5,7 +5,7 @@ def solution(absolutes, signs):
     answer = 0
 
     for i in range(len(absolutes)):
-        if signs[i] == "false":
+        if signs[i] == False:
             print(i)
             answer -= absolutes[i]
         else:
@@ -14,5 +14,5 @@ def solution(absolutes, signs):
     return answer
 
 
-result = solution([4, 7, 12], ["true", "false", "true"])
+result = solution([4, 7, 12], [True, False, True])
 print(result)

@@ -59,12 +59,12 @@ def move(horse_num):
             horse_map[y][x] = horse_map[y][x][:i]
             break
 
-    if chess_map[ny][nx] == 1:
+    if chess_map[ny][nx] == 1: # 빨간색일 경우 말의 배열 뒤집기
         horse_tmp = horse_tmp[-1::-1]
 
     for h in horse_tmp:
-        chess_horse[h][0], chess_horse[h][1] = ny, nx
-        horse_map[ny][nx].append(h)
+        chess_horse[h][0], chess_horse[h][1] = ny, nx # 번호별 말의 좌표 갱신
+        horse_map[ny][nx].append(h) # 말의 배열에 이동한 말의 번호 추가
 
     if len(horse_map[ny][nx]) >= 4:
         return False
