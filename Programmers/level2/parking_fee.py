@@ -2,33 +2,25 @@
 import collections
 import math
 
-
 def cal_minute(in_time, out_time):
     in_h, in_m = map(int, in_time.split(":"))
     out_h, out_m = map(int, out_time.split(":"))
     minute = (out_h - in_h) * 60 + (out_m - in_m)  # 시간이 -일 경우 고려
     return minute
 
-
 def cal_fee(basic_minute, basic_fee, unit_minute, unit_fee, record_time):
     result = []
     for i in record_time:
         total_minute = record_time[i]
-        total_fee = 5000
+        total_fee = basic_fee
 
-        if total_minute < basic_minute:  # 기본시간 보다 적을 경우
-            result.append(total_fee)
-        else:
-            total_fee = int(
-                basic_fee
-                + (math.ceil((total_minute - basic_minute) / unit_minute)) * unit_fee
-            )
-            result.append(total_fee)
+        if total_minute >= basic_minute:  # 기본시간 보다 적을 경우
+            total_fee = int(basic_fee + (math.ceil((total_minute - basic_minute) / unit_minute)) * unit_fee)
+        result.append(total_fee)
+        
     return result
 
-
 # def cal_fee():
-
 
 def solution(fees, records):
     answer = []
@@ -60,7 +52,6 @@ def solution(fees, records):
     record_time = dict(sorted(record_time.items()))  # 정렬
 
     answer = cal_fee(basic_minute, basic_fee, unit_minute, unit_fee, record_time)
-    print(answer)
     return answer
 
 
