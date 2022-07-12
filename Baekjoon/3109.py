@@ -7,7 +7,7 @@ def is_possible(y, x):
     return True
   return False
 
-def pipe(y, x):
+def pipe(y, x): 
   if x == m-1:
     return True
   
