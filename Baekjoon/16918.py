@@ -17,7 +17,7 @@ def find_bomb():
 # 모든 칸 폭탄 설치
 def install_bomb():
     global graph
-    graph = deepcopy(graph_per_two_second)
+    graph = [['O']*M for _ in range(N)]
 
 
 # 폭탄 폭발
@@ -34,6 +34,7 @@ def do_bomb():
 
 N, M, second = map(int, input().split())
 graph = [list(input().rstrip()) for _ in range(N)]
+print(graph)
 graph_per_two_second = [['O']*M for _ in range(N)]  # 2초마다 어차피 전체 그래프에 폭탄 설치
 dx = [-1, 1, 0, 0]
 dy = [0, 0, -1, 1]
