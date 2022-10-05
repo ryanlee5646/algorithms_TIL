@@ -13,7 +13,9 @@ input = stdin.readline
 # 방법 1
 # (재귀회수가 백준에서는 1000으로 제한이 있기 때문에 런타임에러 남 재귀회수 늘려주면 통과는 하는데 다른 방법으로 풀어보기)
 
-
+# 1 2 3 4 5 6 7
+# 1 2 4 5 6 7
+# 4 5 6 7 1 2
 def josephus(arr):
     global result
 
@@ -26,7 +28,6 @@ def josephus(arr):
     result.append(arr.pop(index))
     arr = arr[index:] + arr[:index]
     josephus(arr)
-
 
 N, K = map(int, input().split())
 
