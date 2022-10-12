@@ -40,66 +40,68 @@ dir_x = [0,1,1,1,0,-1,-1,-1] # 시계방향 12시부터
 dir_y = [-1,-1,0,1,1,1,0,-1]
 
 def BFS(x,y,turn):
+
   queue = deque()
   queue.append((x,y,turn))
   visited[king_y][king_x][0] = True
   
   while queue:
-    now_y, now_x, now_turn = queue.popleft()
+    now_x, now_y, now_turn = queue.popleft()
 
-    if graph[now_y][now_x] == 'F':
-      return False
+    if graph[pon_y + now_turn][pon_x] == 'F': # 검은색 다음구역이 금지구역
+      return True
     
     if pon_x + now_turn > 7: # 폰이 밑에 도달했을 경우
-      return True
+      return False
     
     for i in range(8):
       dx = now_x + dir_x[i]
       dy = now_y + dir_y[i]
       next_turn = now_turn +1
       
-      if is_possible(dx, dy) and is_go(dx, dy) and is_visit(dx,dy,now_turn):
-        if not pon_dangerous:
+      if is_possible(dx, dy) and is_go(dx, dy) and is_visit(dx, dy, next_turn):
+        if not pon_dangerous(dx, dy, next_turn):
           visited[dx][dy][next_turn] = True
 
           if catch_pon(dx, dy, now_turn):
             return True
           
           queue.append((dx, dy, next_turn))
-def is_possible(x, y):
+          
+def is_possible(x, y): # 좌표를 벗어나지 않는지 체크
     if 0 <= x < 8 and 0 <= y < 8:
       return True
     return False
 
-def is_go(x,y):
+def is_go(x,y): # 위험 칸 혹은 금지칸이 아닌지 체크
   if graph[y][x] != 'F' and graph[y][x] != 'D':
     return True
   return False
 
-def is_visit(x, y, turn):
+def is_visit(x, y, turn): # 방문한적이 있는지 체크
   if visited[y][x][turn] == True:
     return False
   return True
 
-def pon_dangerous(x, y, turn):
+def pon_dangerous(x, y, turn): # 폰의 위험 칸인지 체크
   if (y == pon_y + turn and x == pon_x -1) or (y == pon_y + turn and pon_x +1):
     return True
   return False
 
-def catch_pon(x, y, turn):
+def catch_pon(x, y, turn): # 폰이 있는지 체크
   if (y == pon_y + turn and x == pon_x):
     return True
   return False 
      
 for t in range(T):
-  graph = [list(input()) for _ in range(8)]
+  graph = [list(input().rstrip()) for _ in range(8)]
 
   king_x, king_y = map(int, input().split())
   king_x, king_y = king_x-1, 8-king_y
   pon_x, pon_y = map(int, input().split())
   pon_x, pon_y = pon_x-1, 8-pon_y
   
-  visited = [[[False] for _  in range(8)] for _ in range(8)]
+  visited = [[[False] * 8 for _  in range(8)] for _ in range(8)]
   
   result = BFS(king_x, king_y, 0)
   if result:
@@ -109,3 +111,29 @@ for t in range(T):
 
 
 
+'''
+# 0 (시작)
+. . . . . . . .
+. . . . . . . .
+. . . . . . . .
+. . . . . P . .
+. . . . D . D .
+. . K . . . . .
+
+# 1
+. . . . . . . .
+. . . . . . . .
+. . . . . . . .
+. . . . . . . .
+. K K K . p . .
+. K . K D . D .
+
+# 3
+. . . . . . . .
+. . . . . . . .
+. . . . . . . .
+K K K K K . . .
+K . . . K . . .
+K . . K . P . .
+
+'''
