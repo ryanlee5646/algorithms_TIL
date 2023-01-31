@@ -40,7 +40,7 @@ dir_x = [0,1,1,1,0,-1,-1,-1] # 시계방향 12시부터
 dir_y = [-1,-1,0,1,1,1,0,-1]
 
 def BFS(x,y,turn):
-
+  
   queue = deque()
   queue.append((x,y,turn))
   visited[king_y][king_x][0] = True
